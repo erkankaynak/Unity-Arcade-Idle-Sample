@@ -48,7 +48,7 @@ public class Player : MonoBehaviour
             transform.position = transform.position + Vector3.back * speed * Time.deltaTime;
         }
 
-        if (Input.GetKeyDown(KeyCode.Space) )
+        if (Input.GetKeyDown(KeyCode.Space) && !isOnAir)
         {
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
             isOnAir = true;
