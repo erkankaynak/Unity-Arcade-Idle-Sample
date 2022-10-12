@@ -5,6 +5,7 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     public float speed = 5f;
+    public float rotateSpeed = 15f;
     public float jumpForce = 1f;
     
 
@@ -25,28 +26,31 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKey(KeyCode.LeftArrow)) {
-            transform.rotation = Quaternion.AngleAxis(-90f, Vector3.up);
-            transform.position = transform.position  + Vector3.left * speed * Time.deltaTime;   
+
+
+        if (Input.GetKey(KeyCode.W))
+        {
+            transform.Translate(Vector3.forward * speed * Time.deltaTime);
         }
 
-        if (Input.GetKey(KeyCode.RightArrow))
+        if (Input.GetKey(KeyCode.S))
         {
-            transform.rotation = Quaternion.AngleAxis(90f, Vector3.up);
-            transform.position = transform.position + Vector3.right * speed * Time.deltaTime;
+            transform.Translate(Vector3.back * speed * Time.deltaTime);
         }
 
-        if (Input.GetKey(KeyCode.UpArrow))
+        if (Input.GetKey(KeyCode.A))
         {
-            transform.rotation = Quaternion.AngleAxis(0f, Vector3.up);
-            transform.position = transform.position + Vector3.forward * speed * Time.deltaTime;
+            transform.Translate(Vector3.left * speed * Time.deltaTime);
+            //transform.position = transform.position + Vector3.left * speed * Time.deltaTime;
         }
 
-        if (Input.GetKey(KeyCode.DownArrow))
+        if (Input.GetKey(KeyCode.D))
         {
-            transform.rotation = Quaternion.AngleAxis(180f, Vector3.up);
-            transform.position = transform.position + Vector3.back * speed * Time.deltaTime;
+            transform.Translate(Vector3.right * speed * Time.deltaTime);
+            //transform.position = transform.position + Vector3.left * speed * Time.deltaTime;
         }
+
+        transform.Rotate(Vector3.up, Input.GetAxis("Mouse X") * rotateSpeed * Time.deltaTime);
 
         if (Input.GetKeyDown(KeyCode.Space) && !isOnAir)
         {
